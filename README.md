@@ -1,6 +1,6 @@
-# stm32-si5351
+# ESP32-Si5351
 
-HAL-based Si5351 driver for STM32.
+Si5351 driver for ESP32 based on [afiskon/stm32-si5351](https://github.com/afiskon/stm32-si5351) STM32 version.
 
 Si5351 is a I2C-programmable 8 kHz - 160 MHz clock generator made by Silicon Labs. It has 3 ports (or more depending on modification) with 50 Ohm output impedance. The signal level can be changed in ~2-11 dBm range and the phase shift between channels is configurable.
 
@@ -8,6 +8,8 @@ Basic interface:
 
 ```
 const int32_t correction = 978;
+
+// initializes Si5351 on the standard ESP32 I2C pins (SDA: 21, SCL: 22)
 si5351_Init(correction);
 
 // 28 MHz @ ~7 dBm
