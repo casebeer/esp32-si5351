@@ -2,6 +2,9 @@
 #ifndef _SI5351_H_
 #define _SI5351_H_
 
+#include <Arduino.h>
+#include <Wire.h>
+
 typedef enum {
     SI5351_PLL_A = 0,
     SI5351_PLL_B,
@@ -48,6 +51,7 @@ typedef struct {
  * Si5351 module. This makes using them a little more convenient than CLK0 and CLK1.
  */
 void si5351_Init(int32_t correction);
+void si5351_Init(int32_t correction, uint8_t i2c_sda, uint8_t i2c_scl);
 void si5351_SetupCLK0(int32_t Fclk, si5351DriveStrength_t driveStrength);
 void si5351_SetupCLK2(int32_t Fclk, si5351DriveStrength_t driveStrength);
 void si5351_EnableOutputs(uint8_t enabled);
