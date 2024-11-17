@@ -31,6 +31,7 @@ typedef struct {
     int32_t mult;
     int32_t num;
     int32_t denom;
+    uint8_t allowIntegerMode;
 } si5351PLLConfig_t;
 
 typedef struct {

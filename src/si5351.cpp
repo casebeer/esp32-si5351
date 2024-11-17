@@ -160,11 +160,22 @@ void si5351_SetupPLL(si5351PLL_t pll, si5351PLLConfig_t* conf) {
     int32_t mult = conf->mult;
     int32_t num = conf->num;
     int32_t denom = conf->denom;
+    uint32_t allowIntegerMode = conf->allowIntegerMode;
 
     P1 = 128 * mult + (128 * num)/denom - 512;
     // P2 = 128 * num - denom * ((128 * num)/denom);
     P2 = (128 * num) % denom;
     P3 = denom;
+
+    // Get the integer control register address for the PLL registers
+    uint8_t intCtlAddr = (pll == SI5351_PLL_A ?
+        SI5351_REGISTER_22_CLK6_CONTROL : SI5351_REGISTER_23_CLK7_CONTROL);
+    // n.b. assumes CLK6 and CLK7 never used, setting CLK6/7_PDN
+    // n.b. assumes spread spectrum never used, not compatible with FBx_INT
+    // Feedback divider must be an EVEN integer for PLL int mode
+    if (allowIntegerMode && num == 0 && mult % 2 == 0) {
+        si5351_write(intCtlAddr, (1 << 7) | (1 << 6)); // CLKx_PDN and FBx_INT
+    }
 
     // Get the appropriate base address for the PLL registers
     uint8_t baseaddr = (pll == SI5351_PLL_A ? 26 : 34);
