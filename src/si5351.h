@@ -7,6 +7,9 @@
 #define SI5351_ADDRESS 0x60
 #define I2C_FREQUENCY 100000U
 
+//#include <Arduino.h>
+#include <Wire.h>
+
 typedef enum {
     SI5351_PLL_A = 0,
     SI5351_PLL_B,
