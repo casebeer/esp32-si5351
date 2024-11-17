@@ -2,6 +2,8 @@
 #ifndef _SI5351_H_
 #define _SI5351_H_
 
+#include <stdint.h>
+
 typedef enum {
     SI5351_PLL_A = 0,
     SI5351_PLL_B,
