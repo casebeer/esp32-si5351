@@ -188,6 +188,7 @@ int si5351_SetupOutput(uint8_t output, si5351PLL_t pllSource, si5351DriveStrengt
     int32_t div = conf->div;
     int32_t num = conf->num;
     int32_t denom = conf->denom;
+    uint8_t inverted = conf->inverted & 0x01;
     uint8_t divBy4 = 0;
     int32_t P1, P2, P3;
 
@@ -236,6 +237,7 @@ int si5351_SetupOutput(uint8_t output, si5351PLL_t pllSource, si5351DriveStrengt
     }
 
     uint8_t clkControl = 0x0C | driveStrength; // clock not inverted, powered up
+    clkControl |= inverted << 4;
     if(pllSource == SI5351_PLL_B) {
         clkControl |= (1 << 5); // Uses PLLB
     }

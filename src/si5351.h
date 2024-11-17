@@ -39,6 +39,7 @@ typedef struct {
     int32_t num;
     int32_t denom;
     si5351RDiv_t rdiv;
+    uint8_t inverted; // set to 1 to invert phase of output
 } si5351OutputConfig_t;
 
 /*
